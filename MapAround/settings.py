@@ -122,19 +122,32 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#CORS
+CORS_ALLOWED_ORIGINS=[
+    'http://localhost:8001',
+    'http://127.0.0.1:8001'
+]
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING':False,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+}
+
+AUTH_USER_MODEL = 'app.User'
+
+DJOSER ={
+    'SERIALIZERS':{
+        'user_create':'app.serializers.UserCreateSerializer',
+        'current_user':'app.serializers.UserSerializer',
+    }
 }
 
 SIMPLE_JWT = {
